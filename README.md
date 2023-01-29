@@ -12,7 +12,7 @@ Then start the ExpressJS server with Node ```node index```
 
 Navigate your browser to localhost:8999 and the controller will be available.
 
-To set your Hyperdeck IP address, change it in the src/index.js file.
+To set your Hyperdeck IP address, change it in the public/index.js file.
 
 ## Contributing
 
