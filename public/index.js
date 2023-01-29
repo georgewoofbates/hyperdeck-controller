@@ -188,6 +188,38 @@ $(function() {
             clipsGroups = 'hide'
         }
     })
+
+    const filterBox = document.querySelector('#filterSearch')
+
+    document.body.onkeyup = function(e) {
+        console.log(e);
+        if (e.key == " " || e.code == "Space" || e.key == "l") {
+          if (filterBox !== document.activeElement) {
+            let data = {
+                command: 'play'
+            }
+            socket.send(JSON.stringify(data))
+          }
+        } else if (e.key == "q") {
+            if (filterBox !== document.activeElement) {
+                let data = {
+                    command: 'goToStart'
+                }
+                socket.send(JSON.stringify(data))
+            }
+        } else if (e.key == "k") {
+            if (filterBox !== document.activeElement) {
+                let data = {
+                    command: 'stop'
+                }
+                socket.send(JSON.stringify(data))
+            }
+        }
+    }
+
+    $('.btn').on('click', function() {
+        $(this).blur()
+    })
 })
 
 
