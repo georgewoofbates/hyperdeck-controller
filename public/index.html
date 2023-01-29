@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperdeck Controller</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js" integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white d-flex flex-column" style="max-height: 100vh; overflow: hidden;">
+    <div class="controls d-flex p-5" style="background-color: #383f46;">
+        <div class="flex-grow-1">
+            <div class="mb-3">
+                <button class="btn btn-success" id="hdPlay"><i class="fa fa-play me-2"></i>Play</button>
+                <button class="btn btn-danger" id="hdStop"><i class="fa fa-stop me-2"></i>Stop</button>
+                <button class="btn btn-primary" id="hsGoToStart">Go to Clip Start</button>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <div id="currentClipName" class="fw-bold h4 m-0">NONE</div>
+                    <div style="font-size: 12px;">CURRENT CLIP</div>
+                </div>
+                <div>
+                    <div id="displayTimecode" class="fw-bold h4 m-0" style="font-family: monospace;">00:00:00:00</div>
+                    <div style="font-size: 12px;">TIME</div>
+                </div>
+                <div>
+                    <div id="displayDuration" class="fw-bold h4 m-0" style="font-family: monospace;">00:00:00:00</div>
+                    <div style="font-size: 12px;">REMAINING</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="searchContent" class="p-5" style="background-color: #505962;">
+        <div class="d-flex">
+            <input class="form-control" type="text" id="filterSearch" placeholder="Find clip ...">
+            <button class="btn btn-light ms-3" id="filterClear">Clear</button>
+        </div>
+    </div>
+    <div id="filterContent" class="p-5" style="overflow-y: scroll; display: none;">
+        <h2 class="fw-bold mb-3">CLIPS</h2>
+        <div class="row" id="filterClips">
+
+        </div>
+    </div>
+    <div id="clipsContent" class="p-5" style="overflow-y: scroll; ">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold mb-3">CLIPS</h2>
+            <div class="d-flex">
+                <button class="btn btn-primary me-2" id="hdGetClips">Reload Clips</button>
+                <button class="btn btn-sm btn-light" id="toggleAll">Show/hide all</button>
+            </div>
+        </div>
+        
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0"><span class="badge bg-primary">COLOUR</span></h5>
+                <p class="m-0"><span id="colourClipNumber"></span> clips</p>
+            </div>
+            <button class="btn btn-sm btn-outline-light groupToggle" data-id="clips-COLOUR">Show/hide</button>
+        </div>
+        
+        <hr>
+        <div id="clips-COLOUR" class="row mb-3 clipsGroup">
+            
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0"><span class="badge bg-warning">TVC</span></h5>
+                <p class="m-0"><span id="tvcClipNumber"></span> clips</p>
+            </div>
+            <button class="btn btn-sm btn-outline-light groupToggle" data-id="clips-TVC">Show/hide</button>
+        </div>
+        <hr>
+        <div id="clips-TVC" class="row mb-3 clipsGroup">
+            
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0"><span class="badge bg-danger">INTERVIEWS</span></h5>
+                <p class="m-0"><span id="ivClipNumber"></span> clips</p>
+            </div>
+            <button class="btn btn-sm btn-outline-light groupToggle" data-id="clips-IV">Show/hide</button>
+        </div>
+        <hr>
+        <div id="clips-IV" class="row mb-3 clipsGroup">
+            
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0"><span class="badge bg-success">OTHER</span></h5>
+                <p class="m-0"><span id="otherClipNumber"></span> clips</p>
+            </div>
+            <button class="btn btn-sm btn-outline-light groupToggle" data-id="clips-OTHER">Show/hide</button>
+        </div>
+        <hr>
+        <div id="clips-OTHER" class="row mb-3 clipsGroup">
+            
+        </div>
+    </div>
+    <div class="fixed-bottom px-5 py-2 text-muted" style="background-color: #383f46;">
+        Made with <i class="fa fa-heart"></i> by <a href="https://lustredigital.co.nz" class="text-muted">Lustre Digital</a>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
