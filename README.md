@@ -1,6 +1,6 @@
 # Hyperdeck Controller
 
-Hyperdeck Controller is a simple Node based local controller for using the Blackmagic Hyperdeck Mini as a playout solution for broadcast. It enables users to select clips, control playback and get duration countdowns. It's based on NodeJS andExpressJS with a Bootstrap front end.
+Hyperdeck Controller is a simple Node based local controller for using the Blackmagic Hyperdeck Mini as a playout solution for broadcast. It enables users to select clips, control playback and get duration countdowns. It's based on NodeJS and ExpressJS with a Bootstrap front end.
 
 ## Installation
 
