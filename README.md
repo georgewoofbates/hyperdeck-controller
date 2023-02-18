@@ -8,18 +8,18 @@ To use Hyperdeck Controller, first clone the GitHub repository to your local mac
 
 Install the Node dependancies by running ```npm install``` in the root directory.
 
-Then start the ExpressJS server with Node ```node index```
+To set your Hyperdeck IP address, change it in the public/index.js in the Websocket open command
+
+Then start the ExpressJS server with Node ```node index``` or on Windows just run the ```start.bat``` file
 
 Navigate your browser to localhost:8999 and the controller will be available.
 
-To set your Hyperdeck IP address, change it in the public/index.js file.
+
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## License
 
