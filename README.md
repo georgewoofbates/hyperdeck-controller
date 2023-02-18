@@ -14,13 +14,7 @@ Then start the ExpressJS server with Node ```node index``` or on Windows just ru
 
 Navigate your browser to localhost:8999 and the controller will be available.
 
-
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
